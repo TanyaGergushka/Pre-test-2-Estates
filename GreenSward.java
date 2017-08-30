@@ -2,9 +2,11 @@ package estates;
 
 public class GreenSward extends AbsParcel {
 
-	public GreenSward(double cost, int space, boolean isRegulation) {
-		super(cost, space, isRegulation);
-		this.setType("GreenSward");
+	public GreenSward(double cost,  String adress, int space, boolean isRegulation) {
+		super(cost, "GreenSward", adress, space, isRegulation);
+	
 	}
+
+	
 
 }

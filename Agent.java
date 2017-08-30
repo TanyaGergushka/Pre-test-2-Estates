@@ -8,7 +8,7 @@ import java.util.Set;
 public class Agent extends AbstractData {
 
 	private HashSet<Seller> sellersOfAgent = new HashSet<>();
-	private ArrayList<Buyer> buyersList = new ArrayList<>();
+	private HashSet<Buyer> buyersList = new HashSet<>();
 	private ArrayList<Views> viewsList = new ArrayList<>();
 	private double budjetAgent;
 
@@ -16,10 +16,7 @@ public class Agent extends AbstractData {
 		super(name);
 	}
 
-	public ArrayList<Buyer> getBuyersList() {
-		return buyersList;
-	}
-
+	
 	public void addBuyerToBuyersList(Buyer buyer) {
 		this.buyersList.add(buyer);
 	}

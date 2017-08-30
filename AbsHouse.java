@@ -2,21 +2,22 @@ package estates;
 
 public abstract class AbsHouse extends AbstractÅstate {
 
-	private String typeOfConstruction;
+	private TypeOfConstruction typeOfConstruction;
 	private int parkingSpace;
 	private int yardSpace;
 
-	public AbsHouse(double cost, int space, int parkingSpace) {
-		super(cost, space);
-		this.setParkingSpace(parkingSpace);
+	public AbsHouse(double cost, String description, String adress, int space,	TypeOfConstruction typeOfConstruction, int parkingSpace, int yardSpace) {
+		super(EstateKind.HOUSE, cost, description, adress, space);
+		this.typeOfConstruction = typeOfConstruction;
+		setParkingSpace(parkingSpace);
+		this.yardSpace = yardSpace;
 	}
 
-	public int getParkingSpace() {
-		return parkingSpace;
-	}
-
-	public void setParkingSpace(int parkingSpace) {
-		this.parkingSpace = parkingSpace;
+	private void setParkingSpace(int parkingSpace) {
+		if (parkingSpace > -1){
+				this.parkingSpace = parkingSpace;
+		}
+	
 	}
 
 }

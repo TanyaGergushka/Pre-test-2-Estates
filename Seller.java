@@ -3,6 +3,7 @@ package estates;
 import java.util.Random;
 
 import estates.*;
+import estates.Abstract흒tate.TypeOfConstruction;
 
 public class Seller extends AbstractClientEstate {
 
@@ -14,17 +15,16 @@ public class Seller extends AbstractClientEstate {
 		 
 	}
 
-	public void register(Abstract흒tate estate) {
-		Random ran = new Random();
-		int indexAgent = ran.nextInt(5);
-		estate.setAgentEstate(Agency.getAgentList().get(indexAgent));
-		Agency.addEstateToCatalog(estate);
-		this.setAgent(Agency.getAgentList().get(indexAgent));
-		Agency.getAgentList().get(indexAgent).addSellersOfAgent(this);
-
+	public void register(Agency agency, Abstract흒tate estate) {
+		Agent agent = agency.registerEstateInCatalog(estate);
+		agent.addSellersOfAgent(this);
 	}
 
 	
+	@Override
+	public String toString() {
+		return  this.name + "[estate=" + estate.getDescription() +", " + estate.getCost() + ", money=" + money + "]";
+	}
 
 	public Abstract흒tate getEstate() {
 		return estate;
@@ -41,5 +41,8 @@ public class Seller extends AbstractClientEstate {
 	public void setMoney(double money) {
 		this.money = money;
 	}
+	
 
-}
+	}
+
+

@@ -1,10 +1,14 @@
 package estates;
 
+import estates.Abstract≈state.TypeOfConstruction;
+
 public class ThreeRoomApartment extends AbsApartament {
 
-	public ThreeRoomApartment(double cost, int space,String typeOfConstruction) {
-		super(cost, space,typeOfConstruction);
-		this.setType("ThreeRoom Apartment");
+	public ThreeRoomApartment(double cost, String adress, int space,  TypeOfConstruction typeOfConstruction) {
+		super(cost, "ThreeRoomApartment", adress, space, typeOfConstruction);
+		
 	}
+
+	
 
 }

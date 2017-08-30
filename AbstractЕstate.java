@@ -4,43 +4,71 @@ import java.util.Comparator;
 
 public abstract class Abstract≈state {
 
+	public enum EstateKind {
+
+		APARTAMENT, HOUSE, PARCEL;
+	}
+
+	public enum TypeOfConstruction {
+
+		≈œ , “ÛıÎ‡, œ‡ÌÂÎ,  ËÔË˜;
+	}
+
+	@Override
+	public String toString() {
+		return "estate " + description + ", cost=" + cost + ", space=" + space + "\n";
+	}
+
 	private String description;
 	private String adress;
 	private double cost;
-	private String type;
+	private EstateKind type;
 	private int space;
 	private Agent agentEstate;
-	
 
-	public Abstract≈state( double cost, int space) {
-		
+	public Abstract≈state(EstateKind type, double cost, String description, String adress, int space) {
+		this.setDescription(description);
+		this.adress = adress;
 		setCost(cost);
 		setSpace(space);
-	
+		setType(type);
+	}
+
+	private void setDescription(String description) {
+		if (description != null) {
+			this.description = description;
+		}
+
+	}
+
+	private void setType(EstateKind type) {
+		this.type = type;
 	}
 
 	public double getCost() {
 		return cost;
 	}
 
-	public void setCost(double cost) {
-		this.cost = cost;
+	private void setCost(double cost) {
+		if (cost > 0) {
+			this.cost = cost;
+		}
+
 	}
 
-	public String getType() {
+	public EstateKind getType() {
 		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public int getSpace() {
 		return space;
 	}
 
-	public void setSpace(int space) {
-		this.space = space;
+	private void setSpace(int space) {
+		if (space > 0) {
+			this.space = space;
+		}
+
 	}
 
 	public Agent getAgentEstate() {
@@ -50,4 +78,9 @@ public abstract class Abstract≈state {
 	public void setAgentEstate(Agent agentEstate) {
 		this.agentEstate = agentEstate;
 	}
+
+	public String getDescription() {
+		return description;
+	}
+
 }

@@ -25,27 +25,15 @@ public class Buyer extends AbstractClientEstate {
 
 	int index = 0;
 
-	public void makeRequest() {
-		index = ran.nextInt(Agency.getAgentList().size());
-		Agency.getAgentList().get(index).addBuyerToBuyersList(this);
-		this.setAgent(Agency.getAgentList().get(index));
+	public void makeRequest(Agency agency) {
+		index = ran.nextInt(agency.getAgentList().size());
+		agency.getAgentList().get(index).addBuyerToBuyersList(this);
+		this.setAgent(agency.getAgentList().get(index));
 		for (int i = 0; i < 3; i++) {
-			AbstractÅstate estate = estate();
-			this.selectedEstates.add(estate);
+			this.selectedEstates.add(agency.returnEstate());
 			System.out.println("The buyer " + this.name + " successfully made a request for "
 					+ selectedEstates.get(selectedEstates.size() - 1).getType());
 		}
-
-	}
-
-	private AbstractÅstate estate() {
-		Random rand = new Random();
-		int index = rand.nextInt(Agency.getCatalog().size());
-		Iterator<AbstractÅstate> iter = Agency.getCatalog().iterator();
-		for (int i = 0; i < index; i++) {
-			iter.next();
-		}
-		return iter.next();
 
 	}
 
@@ -57,35 +45,37 @@ public class Buyer extends AbstractClientEstate {
 			estateForBuy.getAgentEstate().addEstateToViewsList(newView);
 			this.viewsListBuyer.add(newView);
 			estateForBuy.getAgentEstate().addBuyerToBuyersList(this);
-			printInfoForView();
-		}else {
+			printInfoForView(newView.getDate());
+		} else {
 			System.out.println(this.name + " does not have enough money");
-			
-			
+
 		}
 	}
-	
-	private void printInfoForView (){
-		System.out.println(
-				"agent " + estateForBuy.getAgentEstate().name + ", buyer " + this.name + ", allViews for this buyer -> "
-						+ this.getViewsListBuyer().size() + ", type estate " + estateForBuy.getType());
-	}
-	
 
-	public void makeDeal() {
-//		System.out.print("before / ");
-//		System.out.println("The money of an agent " + Agency.getAgentList().get(index).getName() + " -> " + Agency.getAgentList().get(index).getBudjetAgent());
+	private void printInfoForView(LocalDate date) {
+		System.out.println("agent " + estateForBuy.getAgentEstate().name + ", buyer " + this.name
+				+ ", allViews for this buyer -> " + this.getViewsListBuyer().size() + ", type estate "
+				+ estateForBuy.getType() + ", date: " + date);
+	}
+
+	public void makeDeal(Agency agency) {
+		// System.out.print("before / ");
+		// System.out.println("The money of an agent " +
+		// Agency.getAgentList().get(index).getName() + " -> " +
+		// Agency.getAgentList().get(index).getBudjetAgent());
 
 		double price = estateForBuy.getCost();
 		double commissionSeller = price * 0.03;
 		double commissionBuyer = price * 0.03;
-		Agency.addMoneyToAgencyBudjet(price + commissionBuyer / 2 + commissionSeller / 2);
+		agency.addMoneyToAgencyBudjet(price + commissionBuyer / 2 + commissionSeller / 2);
 		this.getAgent().addMoneyToBudjetAgent((commissionBuyer / 2) + (commissionSeller / 2));
 
-//		System.out.print("after deal / ");
-//		System.out.println("The money of an agent " + Agency.getAgentList().get(index).getName() + " -> " + Agency.getAgentList().get(index).getBudjetAgent());
-//		System.out.println(
-//				"the money of an agency " +  Agency.getBudjet());
+		// System.out.print("after deal / ");
+		// System.out.println("The money of an agent " +
+		// Agency.getAgentList().get(index).getName() + " -> " +
+		// Agency.getAgentList().get(index).getBudjetAgent());
+		// System.out.println(
+		// "the money of an agency " + Agency.getBudjet());
 	}
 
 	private List getViewsListBuyer() {
